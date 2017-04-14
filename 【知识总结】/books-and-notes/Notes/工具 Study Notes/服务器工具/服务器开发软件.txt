@@ -1,0 +1,12 @@
+﻿1. zookeeper
+2. dubbo-admin-tocat
+3. dubbo-monitor
+4. nexus
+5. jdk
+6. sonarqube
+7. mysql
+
+* 参见conf文件下的配置
+
+
+mysql引擎

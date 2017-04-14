@@ -1,0 +1,2 @@
+var fromurl=document.referrer;
+
