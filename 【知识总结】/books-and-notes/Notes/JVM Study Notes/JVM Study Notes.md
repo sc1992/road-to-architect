@@ -151,7 +151,7 @@
 	>  - 永久代内存不够用。
 	> - `OutOfMemory`可以理解为申请内存的时候，内存不足，而`StackOverFlowError`可以理解为已经申请好具体的内存大小，只是在使用的时候溢出了，即超过了申请的内存空间大小。
 	
- [^ various overflow or outofmemory reference]: [CSDN][9]
+ [^ various overflow or outofmemory reference]: [CSDN][9]、[GitHub][11]
 
 [1]: http://unixboy.iteye.com/blog/174173/
 [2]: http://baike.baidu.com/link?url=QkLVI9AkFYNj0J26xPlmS_wjyzGq18BsxtNRra5ua66IMO15Uw_WWciQNEHPe1mdcgQmWjKdqfGLw97Sp2Zti_
@@ -163,3 +163,4 @@
 [8]: http://www.cnblogs.com/mingforyou/archive/2012/03/03/2378143.html
 [9]: http://blog.csdn.net/u011983531/article/details/63250882
 [10]: http://blog.csdn.net/yuezhiren/article/details/7948950
+[11]: https://github.com/CountMCristo/framework-assembly-basis/tree/develop

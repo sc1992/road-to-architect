@@ -7,7 +7,8 @@
 
 [^ history version]: 
 - 版本时间信息
-> 2017年2月18日 上午11:52:03
+> 2017年04月14日 上午11:48:02
+> 2017年02月18日 上午11:52:03
 > 2016年09月28日 14:00
 > 2016年09月13日 10:04
 
@@ -168,9 +169,16 @@
 ### 1.14 StackOverflowError [^ stackoverflowerror reference]
 [^ stackoverflowerror reference]: [OSChina][8]
 
-- **`SUMMARY：`堆溢出，当递归太深（往往是没有终止条件所致）的时候会出现。**
+- **`SUMMARY：`栈溢出，当递归太深（往往是没有终止条件所致）的时候会出现。**
 - java.lang.stackoverflow
 	- Thrown when a stack overflow occurs because an application recurses too deeply.
+
+### 1.14 classpath:和classpath*:
+- **`SUMMARY：` `classpath:`从`class`目录下加载第一个对应的文件，`classpath*:`加载`class`目录下的所有文件。**
+- **classpath:**
+	- 只能从`class`目录下加载第一个对应的文件。
+- **classpath*:**
+	- 加载`class`目录下的所有文件。
 
 <br>
 ## 二、注意事项
