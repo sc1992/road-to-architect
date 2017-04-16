@@ -16,10 +16,6 @@
 
 ***
 ## 〇、思维导图
-- **`SUMMARY：`**
-
-> *注意*
-> - 
 
 <br>
 ## 一、简介
@@ -437,12 +433,35 @@
 
 <br>
 ## 十七、调优
-- **`SUMMARY：`合理的缓存策略、延迟加载、合理的`O/R`映射设计和使用批处理等。**
-- 制定合理的缓存策略；
-- 尽量使用延迟加载特性；
-- 采用合理的`Session`管理机制；
-- 使用批量抓取，设定合理的批处理参数（`batch_size`）;
-- 进行合理的`O/R`映射设计。
+- **`SUMMARY：`使用延迟加载、制定合理的缓存、设定合理的批处理参数以及优化抓取策略等方法，其余参考如下。**
+- **使用延迟加载特性；**
+	- 代理（`Proxy`）机制来实现延迟加载；
+	- `load`延迟加载，`get`（不代理）不延迟加载。
+- **制定合理的缓存策略（二级缓存、查询缓存）；**
+- **优化抓取策略** [^ hibernate fetch strategy reference]
+[^ hibernate fetch strategy reference]: [CSDN][1]
+
+	- **`SUMMARY：`在同时需要使用两个关联实体数据的时候，直接通过`join`的形式获取所有数据，不用延迟加载。**
+	- 在`HQL`语句中使用抓取连接查询，通过写一条`left join fetch`语句把相关联的两个实体的数据一次性从数据库中加载上来。这样可以在特定情况下（**同时需要使用到这两个实体的数据**）减少`SQL`的数量来提高查询效率。
+		- 可以给单端关联的映射元素添加`fetch`属性：
+			- `select`：作为默认值，它的策略是当需要使用到关联对象的数据时，另外单独发送一条`select`语句抓取当前对象的关联对象的数据。即延迟加载；
+		    - `join`：它的策略是在同一条`select`语句使用连接来获得对象的数据和它关联对象的数据，此时关联对象的延迟加载失效。
+- **设定合理的批处理参数（`batch_size`）** [^ hibernate batch reference];
+[^ hibernate batch reference]: [CSDN][2]
+
+	- 在没有设置批处理大小的前提下，如果批处理数据过大则会导致java.lang.OutOfMemory: Java heap space错误，有下面两种方式解决：
+		- 通过代码`session.flush()`，`session.clear()`在处理一定批量的数据后手动刷新缓存；
+		- 通过设置批处理大小解决：
+		
+			``` xml
+			<property name="hibernate.jdbc.batch_size">50</property> //每50条语句提交一次 
+			```
+			
+- 如果可以，选用`UUID`作为主键生成器；
+- 进行合理的`O/R`映射设计；
+- 如果可以，选用基于版本号的乐观锁替代悲观锁；
+- 在开发过程中, 开启`hibernate.show_sql`选项查看生成的`SQL`，从而了解底层的状况；开发完成后关闭此选项；
+- 考虑数据库本身的优化，合理的索引、恰当的数据分区策略等都会对持久层的性能带来可观的提升，但这些需要专业的`DBA`（数据库管理员）提供支持。
 
 [1]: http://hibernate.org/orm/
 [2]: http://baike.baidu.com/link?url=er2grHpQchpD-KlvqyMWo-r8kT97qtEj_qltajwuKdhR2uDpq9UleMvwnl-pAYxEeoqlQJ89XZOEKlb92TsILiflkbkAM2R_Frw3u8p0NYi

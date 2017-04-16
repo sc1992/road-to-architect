@@ -1,68 +1,112 @@
-## SQL Study Notes[^ history version][^ reference]
+# SQL [^ reference] Study Notes [^ history version]
 
-@(Books and Notes)[SQL]
+@(Notes)[SQL, Notes]
 
-> VICTORY LOVES PREPARATION
+> VICTORY LOVES PREPARATION.
 
 [^ reference]: [W3School][1]、[菜鸟教程][2]
 
 [^ history version]: 
-- 版本时间信息<br>
+> 版本信息：
+> 2017年04月16日 下午05:02:10
+> 2017年04月06日 上午10:13:29
 > 2016年09月29日 09:20
 
 [TOC]
 
 ***
-### 〇、思维导图
-![](http://i1.piimg.com/567571/dcd95355556a325a.png)
-***
+## 〇、思维导图
 
-### 一、简介
-- `SUMMARY:` `SQL`是一种操作关系型数据库的标准计算机语言。
-- 结构化查询语言(`Structured Query Language`)，简称`SQL`，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。
+## 一、简介
+- **`SUMMARY：`结构化查询语言（`Structured Query Language`）简称`SQL`，是一种数据库查询和程序设计语言，用于管理关系数据库系统。**
+- 结构化查询语言（`Structured Query Language`）简称`SQL`，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；
+- 也是数据库脚本文件的扩展名。
 
-> *注意*
-> - SQL 是一门 ANSI 的标准计算机语言，但是大部分 SQL 数据库程序都拥有它们自己的私有扩展。
-
-<br>
-### 二、语法
-##### [- 基础语法][1]
-###### `SELECT`
-``` sql
-1. SELECT 列名称 FROM 表名称
-2. SELECT * FROM 表名称
-```
-###### `INSERT`
-``` sql
-1. INSERT INTO 表名称 VALUES (值1, 值2,....)
-2. INSERT INTO 表名称 (列1, 列2,...) VALUES (值1, 值2,....)
-``` 
-###### `UPDATE`
-``` sql
-1. UPDATE 表名称 SET 列名称 = 新值
-``` 
-###### `DELETE`
-``` sql
-1. DELETE FROM 表名称
-``` 
-
-> *注意*
-> - `SQL`语句对大小写不敏感；
-> - 上面的语法都是最基本的形式。
-
-##### [- 高级语法][3]
-##### [- 函数][4]
+	> *注意*
+	> - `SQL`是一门`ANSI`的标准计算机语言，但是大部分`SQL`数据库程序都拥有它们自己的私有扩展。
 
 <br>
-### 三、优化[^sql optimization]
+## 二、语法
+### 2.1 基础语法 [^ grammar reference]
+[^ grammar reference]: [W3School][1]
 
+#### 2.1.1 SELECT
+- *`EG.`实例：*
+
+	``` sql
+	1. SELECT 列名称 FROM 表名称
+	2. SELECT * FROM 表名称
+	```
+	
+#### 2.1.2 INSERT
+- *`EG.`实例：*
+
+	``` sql
+	1. INSERT INTO 表名称 VALUES (值1, 值2,....)
+	2. INSERT INTO 表名称 (列1, 列2,...) VALUES (值1, 值2,....)
+	``` 
+	
+#### 2.1.3 UPDATE
+- *`EG.`实例：*
+
+	``` sql
+	1. UPDATE 表名称 SET 列名称 = 新值
+	``` 
+	
+#### 2.1.4 DELETE
+- *`EG.`实例：*
+	
+	``` sql
+	1. DELETE FROM 表名称
+	``` 
+
+	> *注意*
+	> - `SQL`语句对大小写不敏感；
+	> - 上面的语法都是最基本的形式。
+
+### 2.2 高级语法 [^ advanced grammar reference]
+[^ advanced grammar reference]: [W3School][3]
+
+### 2.3 函数 [^ sql function reference]
+[^ sql function reference]: [W3School][4]
+
+<br>
+## 三、优化 [^sql optimization]
 [^sql optimization]: [CSDN][7]、[51CTO][8]、[GitHub][9]
 
+### 3.1 索引 [^ SQL Index Reference]
+[^ SQL Index Reference]: [Runoob][10]
+
+- **`SUMMARY：`索引避免了全表扫描。**
+- `CREATE INDEX`语句用于在表中创建索引；
+- 在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。
+
+### 3.2 SQL优化
+- 要提高`SQL`语句的执行效率，手段之一就是尽量避免全表扫描，最常见的方法就是建立索引。
+#### 3.2.1 优化索引 [^ SQL Index Optimization Reference]
+[^ SQL Index Optimization Reference]: [CSDN][11]
+
+- 避免在`where`子句中使用`is null`或`is not null`对字段进行判断。
+- 避免在`where`子句中使用`!=`或`<>`操作符
+- 避免在`where`子句中使用`or`来链接条件
+- 少用`in`或`not in`。
+- 注意`like`中通配符的使用。
+- 避免在`where`子句中对字段进行表达式操作。
+- 避免在`where`子句中对字段进行函数操作。
+- 使用具体需要的字段代替`*`；
+- **在子查询中，用 exists 代替 in 是一个好的选择。**
+	- *`EG.`实例代码：*
+		
+		``` sql
+		select name from a where id in (select id from b) 
+		// 替代为
+		select name from a where exists (select 1 from b where id = a.id)
+		```
+
 <br>
-### 四、注意
-##### - 数据库范式[^ Database Norm]
-- 设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些规范要求被称为范式，各种范式呈递次规范，越高的范式数据库冗余越小。
-- 目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。
+## 四、注意
+### 4.1 数据库范式 [^ Database Norm]
+
 
 [^ Database Norm]: [百度百科][5]、[博客园][6]
 
@@ -75,3 +119,5 @@
 [7]: http://blog.csdn.net/hguisu/article/details/5731629
 [8]: http://database.51cto.com/art/200904/118526.htm
 [9]: https://github.com/account4github/note/wiki/mysql%E4%BC%98%E5%8C%96
+[10]: http://www.runoob.com/sql/sql-create-index.html
+[11]: http://blog.csdn.net/csdnstudent/article/details/40398245

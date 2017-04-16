@@ -303,10 +303,51 @@
 		- *`EG.` `MyBatis`二级缓存在实际操作中不建议使用：*
 			- `MyBatis`二级缓存是相对于`namespace`下的缓存，如果不同的`namespace`下面有功能相似的查询，其中这样使用了不同的二级缓存，就有可能造成脏数据，导致数据不一致。
 
-### 2.12 调优
-- `MyBatis`在`Session`方面和`Hibernate`的`Session`生命周期是一致的，同样需要合理的`Session`管理机制；
-- `MyBatis`同样具有二级缓存机制；
-- `MyBatis`可以进行详细的`SQL`优化设计。
+### 2.12 调优 [^ mybatis optimize reference]
+[^ mybatis optimize reference]: [ITEye][5]
+
+- **`SUMMARY：`延迟加载、缓存、批量操作、轻量化数据查询以及设置框架提供的其他优化设置，例如`enhancementEnabled="true"`启动`Java`字节码增强功能，提升`getter`和`setter`的调用效能，避免`Java`反射所带来的性能开销等。**
+- **延迟加载**
+- **缓存**
+- **批量操作** [^ mybatis batch reference]
+[^ mybatis batch reference]: [CSDN][3]
+
+	``` xml
+	// 批量插入
+	<insert id="addTrainRecordBatch" parameterType="java.util.List">  
+	
+	    insert into t_train_record (add_time,emp_id,activity_id,flag)   
+	    values  
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.addTime},#{item.empId},#{item.activityId},#{item.flag})  
+	    </foreach>  
+	</insert> 
+	```
+- **轻量化数据查询**
+	- 如果我们涉及到多表查询的时候我们首先会想到什么？自然是连接查询，分为内连接和外连接，这里不再细说几种连接查询。我们都知道连接查询要比`in`查询的效率要高，可是需要注意的是，如果我们是互联网企业，追求性能要高，采用分库分表，这样就要求我们要把一个连接查询拆成多条简单查询，此时用`in`就比较好了。
+      
+      ``` xml
+		// 内连接
+		select name,age,userRow from user as u inner join rol as r on u.userId=r.userId
+		// in(多条语句)
+		select name,age,userRow from user where userId in (select userRow,userId from rol) 
+      ```
+
+- 其他优化策略<br>![][4]
+
+	``` xml
+	<sqlMapConfig>
+		<settings cacheModelsEnabled="true"
+		lazyLoadingEnabled="true"
+		enhancementEnabled="true"
+		errorTracingEnabled="true"
+		maxSessions="1024"
+		maxTransactions="512"
+		maxRequests="2048"
+		useStatementNamespaces="true" />
+	</sqlMapConfig>
+	```
+
 
 <br>
 ## 三、高级知识
