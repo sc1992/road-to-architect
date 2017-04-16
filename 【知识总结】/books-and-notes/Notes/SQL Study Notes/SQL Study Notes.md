@@ -70,43 +70,45 @@
 ### 2.3 函数 [^ sql function reference]
 [^ sql function reference]: [W3School][4]
 
-<br>
-## 三、优化 [^sql optimization]
-[^sql optimization]: [CSDN][7]、[51CTO][8]、[GitHub][9]
-
-### 3.1 索引 [^ SQL Index Reference]
+## 三、索引 [^ SQL Index Reference]
 [^ SQL Index Reference]: [Runoob][10]
 
 - **`SUMMARY：`索引避免了全表扫描。**
 - `CREATE INDEX`语句用于在表中创建索引；
 - 在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。
 
-### 3.2 SQL优化
-- 要提高`SQL`语句的执行效率，手段之一就是尽量避免全表扫描，最常见的方法就是建立索引。
-#### 3.2.1 优化索引 [^ SQL Index Optimization Reference]
+<br>
+## 四、优化 [^sql optimization]
+[^sql optimization]: [CSDN][7]、[51CTO][8]、[GitHub][9]
+
+- 要提高`SQL`语句的执行效率，手段之一就是尽量避免全表扫描，最常见的方法就是建立索引；
+- 其他方式。
+
+### 4.1 优化索引 [^ SQL Index Optimization Reference]
 [^ SQL Index Optimization Reference]: [CSDN][11]
 
-- 避免在`where`子句中使用`is null`或`is not null`对字段进行判断。
-- 避免在`where`子句中使用`!=`或`<>`操作符
-- 避免在`where`子句中使用`or`来链接条件
-- 少用`in`或`not in`。
-- 注意`like`中通配符的使用。
-- 避免在`where`子句中对字段进行表达式操作。
+- 避免在`where`子句中使用`is null`或`is not null`对字段进行判断；
+- 避免在`where`子句中使用`!=`或`<>`操作符；
+- 避免在`where`子句中使用`or`来链接条件；
+- 少用`in`或`not in`；
+- 注意`like`中通配符的使用；
+- 避免在`where`子句中对字段进行表达式操作；
 - 避免在`where`子句中对字段进行函数操作。
-- 使用具体需要的字段代替`*`；
-- **在子查询中，用 exists 代替 in 是一个好的选择。**
+
+### 4.2 其他优化
+- 连接查询要比`in`查询的效率要高；
+- **在子查询中，用exists代替in是一个好的选择;**
 	- *`EG.`实例代码：*
-		
+
 		``` sql
-		select name from a where id in (select id from b) 
+		select name from a where id in ( select id from b ) 
 		// 替代为
-		select name from a where exists (select 1 from b where id = a.id)
+		select name from a where exists ( select 1 from b where id = a.id )
 		```
+- 使用`ORM`的时候，使用具体需要的字段代替`*`；
 
 <br>
 ## 四、注意
-### 4.1 数据库范式 [^ Database Norm]
-
 
 [^ Database Norm]: [百度百科][5]、[博客园][6]
 
