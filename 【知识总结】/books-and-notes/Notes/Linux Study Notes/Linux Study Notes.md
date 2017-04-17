@@ -46,6 +46,19 @@
 - `/etc/profile`配置文件
 - `export JAVA_HOME=/opt/jdk1.8.0_45`
 
+<br>
+## 四、其他
+### 4.1 查看进程占用了哪个端口 [^ linux show process port reference]
+[^ linux show process port reference]: [脚本之家][4]
+
+- *`EG.`命令如下：*
+
+	``` bash
+	$ ps -ef | grep Name
+	$ netstat -nap | grep pid  
+	```
+
 [1]: http://jingyan.baidu.com/article/2fb0ba4043124a00f2ec5f0f.html
 [2]: http://www.linuxidc.com/Linux/2013-01/77368.htm
 [3]: http://blog.csdn.net/aqxin/article/details/48324377
+[4]: http://www.jb51.net/LINUXjishu/331682.html
