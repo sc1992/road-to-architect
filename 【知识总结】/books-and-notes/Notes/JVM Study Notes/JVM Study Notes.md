@@ -2,9 +2,14 @@
 
 @(Notes)[JVM, Notes]
 
-> VICTORY LOVES PREPARATION
+> VICTORY LOVES PREPARATION.
 
 [^ JVM Reference]: [百度百科][2]、[ImportNew][3]
+
+[^ history version]: 
+> 版本信息：
+> 2017年04月17日 上午10:00:20
+> 2017年03月12日 下午01:17:55
 
 [TOC]
 
@@ -18,10 +23,6 @@
 - `JVM`是`Java` `Virtual` `Machine`（`Java`虚拟机）的缩写，`JVM`是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的；
 - `Java`语言的一个非常重要的特点就是与**平台无关性**。而使用`Java`虚拟机是实现这一特点的关键。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入`Java`语言虚拟机后，`Java`语言在不同平台上运行时不需要重新编译。`Java`语言使用`Java`虚拟机屏蔽了与具体平台相关的信息，使得`Java`语言编译程序只需生成在`Java`虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。`Java`虚拟机在**执行字节码时，把字节码解释成具体平台上的机器指令执行**。这就是`Java`的能够**一次编译，到处运行**的原因。
 -  *`img.` `JVM`核心内部组件：* <br>![][4]
-
-[^ history version]: 
-- 版本信息<br>
-> 2017年03月12日 下午01:17:55
 
 <br>
 ## 二、调优 [^ JVM optimize]
@@ -84,7 +85,7 @@
 - **`SUMMARY：` 从年轻代空间（包括 `Eden`和`Survivor`区域）回收内存被称为`Minor GC`，一般情况下，当新对象生成，并且在`Eden`申请空间失败时，就会触发`Scavenge GC`。**
 - 一般情况下，当新对象生成，并且在`Eden`申请空间失败时，就会触发`Scavenge GC`，对`Eden`区域进行`GC`，清除非存活对象，并且把尚且存活的对象移动到`Survivor`区。然后整理`Survivor`的两个区。这种方式的`GC`是对年轻代的`Eden`区进行，不会影响到年老代。因为大部分对象都是从`Eden`区开始的，同时`Eden`区不会分配的很大，所以`Eden`区的`GC`会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使`Eden`去能尽快空闲出来。
 
-##### 2.1.4.2 Majaor GC
+##### 2.1.4.2 Major GC
 - `Major GC`是清理年老代。
 
 ##### 2.1.4.3 Full GC
@@ -152,6 +153,11 @@
 	> - `OutOfMemory`可以理解为申请内存的时候，内存不足，而`StackOverFlowError`可以理解为已经申请好具体的内存大小，只是在使用的时候溢出了，即超过了申请的内存空间大小。
 	
  [^ various overflow or outofmemory reference]: [CSDN][9]、[GitHub][11]
+
+<br>
+## 三、其他
+- 释放资源之后把变量赋值为`null`能够加快垃圾回收。
+
 
 [1]: http://unixboy.iteye.com/blog/174173/
 [2]: http://baike.baidu.com/link?url=QkLVI9AkFYNj0J26xPlmS_wjyzGq18BsxtNRra5ua66IMO15Uw_WWciQNEHPe1mdcgQmWjKdqfGLw97Sp2Zti_
