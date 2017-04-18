@@ -17,13 +17,32 @@
 ***
 
 ## 〇、个性标准
+- 一般标准，参考《Study Notes Contents Format Criteria》；# Scattered But Useful Programming Knowledge[^ history version]
+--- *Markdown Version*
+
+@(SCATTER)[Notes, Markdown]
+
+> VICTORY LOVES PREPARATION.
+
+[^ history version]: 
+- 版本时间信息
+> 2017年04月14日 上午11:48:02
+> 2017年02月18日 上午11:52:03
+> 2016年09月28日 14:00
+> 2016年09月13日 10:04
+
+[TOC]
+
+***
+
+## 〇、个性标准
 - 一般标准，参考《Study Notes Contents Format Criteria》；
 - 每条记录都要标配**`SUMMARY：`**；
 - 每条记录有参考就要标注；
 - 每条记录最好有实例。
 
 <br>
-## 一、NOTES
+## 一、具体内容
 ### 1.1 断言 [^assert]
 - **`SUMMARY：`程序设计中的一种（真假，默认判断真）判断逻辑。**
 - 在程序设计中，断言（`assertion`）是一种放在程序中的一阶逻辑（如，一个结果为真或是假的逻辑判断式），目的是为了标示与验证程序开发者预期的结果——当程序运行到断言的位置时，对应的断言应该为真。若断言不为真时，程序会中止运行，并给出错误消息。
