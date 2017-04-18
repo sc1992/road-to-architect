@@ -15,14 +15,6 @@
 
 ***
 ## 〇、思维导图
-- **`SUMMARY：`**
-- `PENDING`：
-	- 认证流程；
-	- 授权流程；
-	- 流程中的注意点。
-	
-> *注意*
-> - 
 
 <br>	
 ## 一、简介
@@ -518,7 +510,7 @@
 
 <br>	
 ## 四、项目集成
-### 4.1 与Spring Web项目整合
+### 4.1 与Spring Web整合
 - `shiro`与`springweb`项目整合在“基于`url`拦截实现的工程”基础上整合，基于`url`拦截实现的工程的技术架构是`springmvc` + `mybatis`，整合注意两点：
 	- `shiro`与`spring`整合
 	- 加入`shiro`对`web`应用的支持
@@ -696,7 +688,7 @@
 	
 		// shiro在认证过程中出现错误后将异常类路径通过request返回
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
-		if(exceptionClassName!=null){
+		if(null != exceptionClassName){
 			if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
 				throw new CustomException("账号不存在");
 			} else if (IncorrectCredentialsException.class.getName().equals(
