@@ -1,4 +1,4 @@
-# 算法 [^ 算法 reference] Study Notes [^ history version]
+# 算法 [^ 算法 reference] Study Notes [^ history version][^ review date]
 
 @(Notes)[算法, Notes]
 
@@ -10,6 +10,10 @@
 > 版本信息：
 > 2017年04月03日 下午06:49:58
 > 2017年02月22日 下午02:13:41
+
+[^ review date]: 
+> 复习时间：
+> 2017年04月21日 下午04:28:02
 
 [TOC]
 
