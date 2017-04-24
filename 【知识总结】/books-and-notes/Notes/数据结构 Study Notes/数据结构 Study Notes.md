@@ -1,4 +1,4 @@
-# 数据结构 [^ 数据结构 reference] Study Notes [^ history version]
+# 数据结构 [^ 数据结构 reference] Study Notes [^ history version][^ review date]
 
 @(Notes)[数据结构, Notes]
 
@@ -8,14 +8,17 @@
 
 [^ history version]: 
 > 版本信息：
-> 2017年2月22日 下午1:26:53
+> 2017年04月24日 下午01:40:03
+> 2017年02月22日 下午01:26:53
+
+[^ review date]:
+> 复习时间：
+> 2017年04月24日 下午01:40:03
 
 [TOC]
 
 ***
-
 ## 〇、思维导图
-- **`SUMMARY:`**
 
 <br>
 ## 一、简介 [^ profile reference]
