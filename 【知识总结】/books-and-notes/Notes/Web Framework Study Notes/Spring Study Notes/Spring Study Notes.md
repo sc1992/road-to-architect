@@ -1,4 +1,4 @@
-# Spring Study Notes [^ history version]
+# Spring Study Notes [^ history version] [^ review date]
 
 @(J2EE)[Spring [^Spring Framework], Notes]
 
@@ -7,6 +7,8 @@
 > VICTORY LOVES PREPARATION.
 
 [^ history version]: 
+> 版本信息：
+> 2017年04月23日 下午05:01:34
 > 2017年04月05日 下午01:41:44
 > 2017年04月05日 上午11:36:39
 > 2017年02月15日 下午02:42:32
@@ -24,6 +26,11 @@
 > 2015年12月01日 00:00
 > 2015年11月03日 00:00
 > 2015年07月31日 00:00
+
+[^ review date]: 
+> 复习时间：
+> 2017年04月23日 下午05:14:59
+
 
 [TOC]
 
@@ -671,15 +678,16 @@ public class CGLIBProxy implements MethodInterceptor {
 			- **This element does not activate processing of Spring’s `@Transactional` annotation. Use the <tx:annotation-driven/> element for that purpose.**
 	   -  用于激活那些已经在`Spring`容器里注册过的`bean`（无论是通过`xml`的方式还是通过`package sanning`的方式）上面的注解。
 	- `<context:component-scan>`
+		- *The use of `<context:component-scan>` implicitly enables the functionality of `<context:annotation-config>`. There is usually no need to include the `<context:annotation-config>` element when using `<context:component-scan>`.*
     	- 除了具有`<context:annotation-config>`的功能之外，`<context:component-scan>`还可以在指定的`package`下扫描以及注册`javabean `。
+    
     
 [^ annotation-config reference]: [Spring][10]
 
 ### 7.2 杂项
-- 事务是相对于一个`Connection`而言的，两个`Connection`不可能共用一个事务;
-- 轻量级应用和重量级应用
-	- 根据一个应用提供的服务(已经打开，没有打开的不算，因为有的容器的功能是默认关闭的)的多少来确定
-- *The use of `<context:component-scan>` implicitly enables the functionality of `<context:annotation-config>`. There is usually no need to include the `<context:annotation-config>` element when using `<context:component-scan>`.*
+- 事务是相对于一个`Connection`而言的，两个`Connection`不可能共用一个事务；
+- 轻量级应用和重量级应用：
+	- 根据一个应用提供的服务(已经打开，没有打开的不算，因为有的容器的功能是默认关闭的)的多少来确定。
 - 获取`properties`中的键值对：
 
 	``` java

@@ -1,10 +1,12 @@
-# Spring MVC Study Notes [^ history version]
+# Spring MVC Study Notes [^ history version] [^ review date]
 
 @(J2EE)[Spring, MVC, Notes]
 
 > VICTORY LOVES PREPARATION.
 
 [^ history version]: 
+> 版本信息：
+> 2017年04月23日 下午05:14:59
 > 2017年04月12日 下午07:14:22
 > 2017年04月10日 下午05:39:10
 > 2017年04月06日 上午09:54:39
@@ -14,29 +16,37 @@
 > 2015年07月14日
 > 2015年07月05日
 
+[^ review date]: 
+> 复习时间：
+> 2017年04月23日 下午05:14:59
+
 [TOC]
 
 ***
 ## 〇、思维导图
 
 <br>
-## 一、简介
+## 一、简要介绍
 
 <br>
 ## 二、MVC设计典范
-- `SUMMARY：`MVC比传统的非MVC架构模式更加符合“高内聚、低耦合”原则。
+- **`SUMMARY：` `MVC`比传统的非`MVC`架构模式更加符合“高内聚、低耦合”原则，更加能够解决复杂、规模比较大的项目。**
+
 ### 2.1 Model
-- 对象模型。
+- 领域模型。
+
 ### 2.2 View
 - 内容显示。
+
 ### 2.3 Controller
-- 业务控制、处理。
+- 业务逻辑。
 
 <br>
 ## 三、HttpServletRequest和HttpServletResponse
-- `SUMMARY：`负责服务端和客户端之间信息交互。
+- **`SUMMARY：`负责服务端和客户端之间信息交互。**
+
 ### 3.1 HttpServletRequest
-- `SUMMARY：`向`Web`服务器提供请求信息。
+- **`SUMMARY：`向`Web`服务器提供请求信息。**
 - 官方定义
 	-  `Extends the ServletRequest interface to provide request information for HTTP servlets.`
 	- `The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc).`
@@ -47,7 +57,7 @@
 	> - `request.getRequestDispatcher(“view”).forward(request,response)`是将客户端的请求`forward`到`view`对应的页面或者链接，进一步处理。
 
 ### 3.2 HttpServletResponse
-- `SUMMARY：`用于传递服务器返回给客户端的信息。
+- **`SUMMARY：`用于传递服务器返回给客户端的信息。**
 - `Extends the ServletResponse interface to provide HTTP-specific functionality in sending a response. For example, it has methods to access HTTP headers and cookies.`
 - `The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc).`
 - `response`是服务器端容器生成的用于给反馈给客户端相关的页面和参数信息。
@@ -57,7 +67,7 @@
 
 <br>
 ## 四、核心原理
-- `SUMMARY：`关键在`DispatchServlet`的调度，处理服务器交付的请求，找到`Controller`，然后把返回结果输出给服务器。
+- **`SUMMARY：`关键在`DispatchServlet`的调度，处理服务器交付的请求，找到`Controller`，然后把返回结果输出给服务器。**
 ![][1]
 
 	> *注意*
@@ -65,11 +75,12 @@
 
 <br>
 ## 五、注解详解
-- `SUMMARY：`参考`Spring Study Notes.docx`。
+- **`SUMMARY：`参考`Spring Study Notes.docx`。**
 
 <br>
 ## 六、转发和重定向
-- `SUMMARY：`转发是同一次请求，重定向是新的请求。
+- **`SUMMARY：`转发是同一次请求，重定向是新的请求。**
+
 ### 6.1 转发
 - 控制器中直接返回
 
@@ -94,7 +105,7 @@
 	```
 <br>
 ## 七、文件上传
-- `SUMMARY：`参考[`SSM`][2]项目。
+- **`SUMMARY：`参考[`SSM`][2]项目。**
 
 <br>
 ## 八、拦截器和过滤器
@@ -107,8 +118,8 @@
 <br>
 ## 十、MappingJackson2HttpMessageConverter
 - **`SUMMARY：`可以把变量转换为`JSON`数据格式。**
-- Implementation of HttpMessageConverter that can read and write JSON using Jackson 2.x's；
-- This converter can be used to bind to typed beans, or untyped HashMap instances.
+- `Implementation of HttpMessageConverter that can read and write JSON using Jackson 2.x's`；
+- `This converter can be used to bind to typed beans, or untyped HashMap instances`.
 - *`EG.` `MappingJackson2HttpMessageConverter`源码：*
 
 	``` java
@@ -228,6 +239,8 @@
 - **`SUMMARY：`可以通过特定的注解批量注入需要的`Bean`。**
 
 ### 11.1 context:annotation-config和context:component-scan
+- **`SUMMARY：` `<context:annotation-config>`激活基本的注解，如 `@Required`、`@Autowired`和`@Resource `等。**
+- **`SUMMARY：` 具有`<context:annotation-config>`的功能以及在指定的`package`下扫描以及注册`Bean`。**
 - `<context:annotation-config>`和`<context:component-scan>`
 	- `<context:annotation-config>`[^ annotation-config reference]
 		- activates the Spring infrastructure for various annotations to be detected in bean classes: Spring’s `@Required` and `@Autowired`, as well as JSR 250’s `@PostConstruct`, `@PreDestroy `and `@Resource `(if available), and JPA’s `@PersistenceContext` and `@PersistenceUnit` (if available). Alternatively, you can choose to activate the individual BeanPostProcessors for those annotations explicitly.
@@ -239,6 +252,7 @@
 [^ annotation-config reference]: [Spring][10]
 
 ### 11.2 mvc:annotation-driven
+- **`SUMMARY：`注入`@Controller`和`@RequestMapping`对应的`Bean`以及设置消息转换器。**
 - 默认注入`RequestMappingHandlerMapping`（`@Controller`）和`RequestMappingHandlerAdapter`（`@RequestMapping`）
 - 设置消息转换器（`message-converters`）
 
@@ -266,6 +280,10 @@
 		</mvc:annotation-driven>
 	```
 
+	> *注意*
+	> - `@Controller`和`@RequestMapping`对应的`Bean`是默认被注入的。
+
 [1]: http://p1.bpimg.com/567571/ac85d05af98f3417.png
 [2]: https://coding.net/u/Recognizer/p/SSM/git
 [3]: http://jinnianshilongnian.iteye.com/blog/1733708
+[10]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#xsd-config-body-schemas-context-ac

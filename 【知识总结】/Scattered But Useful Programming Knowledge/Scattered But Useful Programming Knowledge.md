@@ -1,42 +1,27 @@
-# Scattered But Useful Programming Knowledge[^ history version]
---- *Markdown Version*
+# Scattered But Useful Programming Knowledge[^ history version][^ review date]
 
 @(SCATTER)[Notes, Markdown]
 
 > VICTORY LOVES PREPARATION.
 
 [^ history version]: 
-- 版本时间信息
+> 版本信息：
+> 2017年04月23日 下午06:07:54
+> 2017年04月23日 下午05:05:33
 > 2017年04月14日 上午11:48:02
 > 2017年02月18日 上午11:52:03
 > 2016年09月28日 14:00
 > 2016年09月13日 10:04
 
-[TOC]
-
-***
-
-## 〇、个性标准
-- 一般标准，参考《Study Notes Contents Format Criteria》；# Scattered But Useful Programming Knowledge[^ history version]
---- *Markdown Version*
-
-@(SCATTER)[Notes, Markdown]
-
-> VICTORY LOVES PREPARATION.
-
-[^ history version]: 
-- 版本时间信息
-> 2017年04月14日 上午11:48:02
-> 2017年02月18日 上午11:52:03
-> 2016年09月28日 14:00
-> 2016年09月13日 10:04
+[^ review date]:
+> 复习时间：
+> 2017年04月23日 下午06:07:54
 
 [TOC]
 
 ***
-
 ## 〇、个性标准
-- 一般标准，参考《Study Notes Contents Format Criteria》；
+- 一般标准，参考《`Study Notes Contents Format Criteria`》；
 - 每条记录都要标配**`SUMMARY：`**；
 - 每条记录有参考就要标注；
 - 每条记录最好有实例。
@@ -78,7 +63,7 @@
 ### 1.5 net.sf.json.JSONObject.put(String key, java.util.Map)
 - `SUMMARY：`**`JSONObject`实现了`Map`，所以在存储的时候如果`value`是`Map`，则会进一步处理，而不是“所见即所得”。**
 
-### 1.6 数据库unique key 和 NULL问题
+### 1.6 数据库unique key和null问题
 - **`SUMMARY：`定义了`unique key`，不一定要使用，所以如果记录中插入了非`unique key`，则不应该报`unique key`相关错误，所以`NULL`值是不会判断`unique key`的。**
 
 ### 1.7 高内聚低耦合 [^ high cohesion and low coupling]
@@ -172,14 +157,14 @@
 
 	> *注意*
 	> - 类中的静态属性会被加入到类对象（也可以叫做类的模板，是类的描述）的构造器中，静态方法也会被加入到类对象中；
-	> - 当**第一次使用类时**，`JVM`会通过类加载器，加载类对象，从而**初始化静态属性**，并装入类的方法，包括静态方法和实例方法（**方法不会被调用，只是加载**，从这个意义上来说，静态方法和实例方法是类似的）；
-	> - 当创建类的实例对象时，`JVM`会调用类的构造器，从而初始化类的属性。
+	> - **类的加载** 当**第一次使用类时**，`JVM`会通过类加载器，加载类对象，从而**初始化静态属性**，并装入类的方法，包括静态方法和实例方法（**方法不会被调用，只是加载**，从这个意义上来说，静态方法和实例方法是类似的）；
+	> - **类的创建** 当创建类的实例对象时，`JVM`会调用类的构造器，从而初始化类的属性。
 	> - 为什么在类加载的时候会初始化静态变量不会调用静态方法？
 	>  - 方法是对现实世界中对象行为的封装和抽象，虽然静态方法是属于类本身的（非类的实例对象），但是这个只是从语法调用上来说，方法被调用还是要涉及到实际世界中对象（`Java`世界中也可以是类）的交互，即**实际行为的发生才能促使（面向实际生活中对象的`Java`）方法被调用，方法调用是一个动态的过程**。而**静态变量（静态属性）则是类的属性（动态变量更偏向是一种对象的属性），那么类的生成必然伴随着其属性的生成**。
 
 ### 1.12 synchronized
-- **`SUMMARY：` `Java`语言的关键字，修饰方法或代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码。**
-- `Java`语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码；
+- **`SUMMARY：` `Java`语言的关键字，修饰方法或代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码所在的类。**
+- `Java`语言的关键字，当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码所在的类；
 - 为了解决线程并发问题。
 
 ### 1.13 语法和语义 [^ grammer and semantic reference]
@@ -192,12 +177,15 @@
 - java.lang.stackoverflow
 	- Thrown when a stack overflow occurs because an application recurses too deeply.
 
-### 1.14 classpath:和classpath*:
+### 1.15 classpath:和classpath*:
 - **`SUMMARY：` `classpath:`从`class`目录下加载第一个对应的文件，`classpath*:`加载`class`目录下的所有文件。**
 - **classpath:**
 	- 只能从`class`目录下加载第一个对应的文件。
 - **classpath*:**
 	- 加载`class`目录下的所有文件。
+
+### 1.16 XML中的DTD和XSD的区别与应用 pending [^ dtd&xsd reference]
+[^ dtd&xsd reference]: [CSDN][9]
 
 <br>
 ## 二、注意事项
@@ -210,3 +198,4 @@
 [6]: http://blog.csdn.net/zjh0723/article/details/3601345
 [7]: http://wenda.tianya.cn/question/7cdcfdf6d5c04e14?sort=t
 [8]: http://tool.oschina.net/apidocs/apidoc?api=jdk_7u4
+[9]: http://blog.csdn.net/ningguixin/article/details/8171581

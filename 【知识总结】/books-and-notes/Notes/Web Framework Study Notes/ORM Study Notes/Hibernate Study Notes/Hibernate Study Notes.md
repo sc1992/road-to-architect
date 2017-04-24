@@ -2,15 +2,20 @@
 
 @(Notes)[Hibernate, notes]
 
-> VICTORY LOVES PREPARATION
+> VICTORY LOVES PREPARATION.
 
 [^ history version]: 
 > 版本信息：
+> 2017年04月23日 下午05:39:10
 > 2017年04月05日 下午04:39:15
 > 2017年03月24日 上午10:49:56
 > 2017年03月20日 下午08:23:42
 
 [^ Hibernate Reference]: [Hibernate.org][1]、[百度百科][2]
+
+[^ review date]: 
+> 复习时间：
+> 2017年04月23日 下午05:39:10
 
 [TOC]
 
@@ -18,7 +23,7 @@
 ## 〇、思维导图
 
 <br>
-## 一、简介
+## 一、简要介绍
 - **`SUMMARY：` `Hibernate`是一个开源的对象关系映射框架。**
 - `Hibernate`是一个开放源代码的对象关系映射框架，它对`JDBC`进行了非常轻量级的对象封装，使得`Java`程序员可以随心所欲的使用对象编程思维来操纵数据库；
 - `Hibernate`可以应用在任何使用`JDBC`的场合，既可以在`Java`的客户端程序使用，也可以在`Servlet/JSP`的`Web`应用中使用；
@@ -30,7 +35,7 @@
 
 <br>
 ## 三、What and Why O/R Mapping
-- **`SUMMARY：` 为了简化数据库操作、面向对象地编程。**
+- **`SUMMARY：` 为了简化数据库操作、面向对象地进行编程。**
 - `Object` `and` `Relational` `Mapping(ORM)`，对象（`Bean` `Entity`）关系（关系数据库）映射；
 - `JDBC`操作数据库很繁琐，通过`ORM`建立关联简化操作；
 - `SQL`编写不是面向对象的；
@@ -45,10 +50,10 @@
 - `MyBatis`
 - `xorm`
 
-> *注意*
-> - `JPA`：
->  - `Java` `Persistence` `API`
->  - 是一种持久化操作标准。
+	> *注意*
+	> - `JPA`：
+	>  - `Java` `Persistence` `API`
+	>  - 是一种持久化操作标准。
 
 <br>
 ## 五、核心接口和类
@@ -266,9 +271,9 @@
 	   }
 	```
 
-> *注意*
-> - 部分注意事项请见代码注释；
-> - 使用`HQL`的时候要使用导航关系（强烈建议），`eg.` `Group.user.name`。
+	> *注意*
+	> - 部分注意事项请见代码注释；
+	> - 使用`HQL`的时候要使用导航关系（强烈建议），`eg.` `Group.user.name`。
 
 <br>
 ## 十、Hibernate缓存
@@ -332,12 +337,16 @@
 - `First` `In` `First` `Out`
 - 早来的先丢弃（顺序方面）
 
-> *注意*
-> - 具体参考`Cache` `Study` `Notes`。
+	> *注意*
+	> - 具体参考`Cache` `Study` `Notes`。
 
 <br>
 ## 十一、性能优化
-### 11.1 1+N问题（典型的面试题）
+### 11.1 1+N问题（典型的面试题） [^ hibernate 1+n reference]
+[^ hibernate 1+n reference]: [CSDN][16]
+
+- **`SUMMARY：`使用延迟加载、批处理以及`join fetch`等方法。**
+
 - **问题描述**
 	- `Hibernate`中用户要取出两个关联的对象的表格数据的时候，如本例中的`Topic`和`Category`，此时用户本想只取出`Topic`的信息，但是因为`Topic`和`Category`是`ManyToOne`的关系，所以导致了在取`Topic`的同时去取了大量的`Category`信息，造成了无用的查询。
 - **解决方案**
@@ -348,18 +357,21 @@
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	```
 		-  `ManyToOne`、`OneToMany`和`ManyToMany`中对关联对象的延迟调用读出持久化对象时，并不把关联的对象实际读出，而是延迟到访问持久化对象的关联对象属性时，才向数据库发成读操作。
-	- 在`Entity`上添加`@BatchSize(size = int)`注解进行批量操作，自己规定批量处理的处理单元大小
+	- 在`Entity`（`N`方）上添加`@BatchSize(size = int)`注解进行批量操作，自己规定批量处理的处理单元大小。
 		- **`SUMMARY：` 批量删除、更新和批量插入数据。**
 		- `Batch` `Size`是设定对数据库进行批量删除，批量更新和批量插入的时候的批次大小，有点相当于设置`Buffer`缓冲区大小的意思。
+		- 它会发出`1+N/5`条`select`语句；
 		- `Batch` `Size`越大，批量操作的向数据库发送`sql`的次数越少，速度就越快。
 		- *`eg.`实例：*
 			- 是当`Batch Size=0`的时候，使用`Hibernate`对`Oracle`数据库删除`1`万条记录需要`25`秒，`Batch Size = 50`的时候，删除仅仅需要`5`秒！
 	- 使用`join` `fetch`
 		- **`SUMMARY：` 在关联对象抓取时，主体对象和关联对象用一句外键关联的`sql`同时查询出来，不会形成多次查询，其提供一个主动抓取的机会，这样就不会在非延迟加载查询`parent`对象的时候，发出了`N`条`child`对象的查询语句。**
-		- 使用`session.createCriteria(Entity.class)`，因为`createCriteria()`默认使用表连接进行数据的查询操作
-		- 使用`session.createQuery(“from Topic t left join fetch t.category c”)`，自己写`join` `fetch`的`sql`语句
+		- 使用`session.createCriteria(Entity.class)`，因为`createCriteria()`默认使用表连接进行数据的查询操作；
+		- 使用`session.createQuery(“from Topic t left join fetch t.category c”)`，自己写`join` `fetch`的`sql`语句。
 
-- http://blog.knowsky.com/186347.htm
+	> *注意*
+	> - 在多对一关系中，一般都是由多的一方来维护关系的，此时会出现`1+N`问题；
+	> - 如果一的一方维护关系，效果更差。
 
 <br>
 ## 十二、常用方法
@@ -478,3 +490,4 @@
 [13]: https://coding.net/u/Recognizer/p/baidu-cloud-career/git/tree/develop/%E3%80%90%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E3%80%91/%E3%80%90%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E3%80%91/books-and-notes/Notes/Cache%20Study%20Notes
 [14]: http://blog.csdn.net/u013125680/article/details/40862693
 [15]: http://blog.csdn.net/huangaigang6688/article/details/7761310
+[16]: http://blog.csdn.net/eson_15/article/details/51322196
